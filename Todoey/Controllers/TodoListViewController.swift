@@ -17,7 +17,7 @@ class TodoListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         
+        
         loadItems()
         
     }
@@ -45,11 +45,14 @@ class TodoListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         
-        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        editItems(tableView: tableView, indexPath: indexPath)
         
-        saveItems()
-        
-        tableView.deselectRow(at: indexPath, animated: true)
+        //
+        //        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        //
+        //        saveItems()
+        //
+        //        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     
@@ -104,6 +107,28 @@ class TodoListViewController: UITableViewController {
             print("Error fetching data from context\(error)")
         }
         
+    }
+    
+    func editItems(tableView: UITableView, indexPath: IndexPath){
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Edit Item", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Save", style: .default) { [self] (action) in
+            self.itemArray[indexPath.row].title = textField.text
+            self.saveItems()
+        }
+        
+        alert.addTextField { (alertTextField) in
+            alertTextField.text = self.itemArray[indexPath.row].title
+            textField = alertTextField
+        }
+        
+        alert.addAction(action)
+        
+        present(alert, animated: true, completion: nil)
+        
+        tableView.reloadData()
     }
     
 } // end of class TodoListViewController
