@@ -87,6 +87,18 @@ class TodoListViewController: UITableViewController {
     
     //MARK: - Model Manipulation Methods
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            context.delete(itemArray[indexPath.row])
+            itemArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+        }
+        saveItems()
+    }
+    
+    
     func saveItems(){
         
         do{
@@ -131,6 +143,12 @@ class TodoListViewController: UITableViewController {
         tableView.reloadData()
     }
     
+//    func deleteItem(indexPath: IndexPath){
+//        context.delete(itemArray[indexPath.row])
+//        itemArray.remove(at: indexPath.row)
+//        saveItems()
+//    }
+//
 } // end of class TodoListViewController
 
 
