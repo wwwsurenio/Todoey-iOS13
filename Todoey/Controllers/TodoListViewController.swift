@@ -22,7 +22,7 @@ class TodoListViewController: UITableViewController {
         
     }
     
-    //MARK - Tableview Datasource Methods
+    //MARK: - Tableview Datasource Methods
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return itemArray.count
@@ -112,7 +112,7 @@ class TodoListViewController: UITableViewController {
     }
     
     func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
-
+        
         do{
             itemArray = try context.fetch(request)
         }catch{
@@ -124,8 +124,9 @@ class TodoListViewController: UITableViewController {
     }
     
     func editItems(tableView: UITableView, indexPath: IndexPath){
-        var textField = UITextField()
         
+        //the edit task part
+        var textField = UITextField()
         let alert = UIAlertController(title: "Edit Item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Save", style: .default) { [self] (action) in
@@ -142,15 +143,13 @@ class TodoListViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
         
+        //the checkmark adder part
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        
         tableView.reloadData()
     }
-    
-    //    func deleteItem(indexPath: IndexPath){
-    //        context.delete(itemArray[indexPath.row])
-    //        itemArray.remove(at: indexPath.row)
-    //        saveItems()
-    //    }
-    //
 } // end of class TodoListViewController
 
 
@@ -158,7 +157,7 @@ extension TodoListViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
         
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-
+        
         request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
         
         request.sortDescriptors  = [NSSortDescriptor(key: "title", ascending: true)]
@@ -177,6 +176,6 @@ extension TodoListViewController: UISearchBarDelegate{
             searchBarSearchButtonClicked(searchBar)
         }
     }
-        
+    
 }
 
