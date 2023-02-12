@@ -17,7 +17,7 @@ class CategoryViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadItems()
+        loadCategory()
         
     }
     
@@ -30,8 +30,7 @@ class CategoryViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        let category = categoryArray[indexPath.row]
-        cell.textLabel?.text = category.name
+        cell.textLabel?.text = categoryArray[indexPath.row].name
         
         return cell
     }
@@ -49,18 +48,18 @@ class CategoryViewController: UITableViewController {
         var textField = UITextField()
         let alert = UIAlertController(title: "Add New Category", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
             //what will happen once the user clicks the Add Item button on our UIAlert
             
-            let newItem = Category(context: self.context)
-            newItem.name = textField.text!
-            self.categoryArray.append(newItem)
+            let newCategory = Category(context: self.context)
+            newCategory.name = textField.text!
+            self.categoryArray.append(newCategory)
             
-            self.saveItems()
+            self.saveCategory()
         }
         
         alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new item"
+            alertTextField.placeholder = "Add a new category"
             textField = alertTextField
         }
         
@@ -80,19 +79,19 @@ class CategoryViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
         }
-        saveItems()
+        saveCategory()
     }
     
-    func saveItems(){
+    func saveCategory(){
         do{
             try context.save()
         } catch {
             print("Error saving context\(error)")
         }
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
     
-    func loadItems(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
+    func loadCategory(with request: NSFetchRequest<Category> = Category.fetchRequest()) {
         do{
             categoryArray = try context.fetch(request)
         }catch{
@@ -110,7 +109,7 @@ class CategoryViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Save", style: .default) { [self] (action) in
             self.categoryArray[indexPath.row].name = textField.text
-            self.saveItems()
+            self.saveCategory()
         }
         
         alert.addTextField { (alertTextField) in
