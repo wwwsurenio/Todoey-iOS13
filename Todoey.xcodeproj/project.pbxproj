@@ -12,6 +12,7 @@
 		59407AD1299BC1DD00EC2240 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 59407AD0299BC1DD00EC2240 /* RealmSwift */; };
 		59407AD5299BCF7200EC2240 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59407AD4299BCF7200EC2240 /* Item.swift */; };
 		59407AD7299BCF8200EC2240 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59407AD6299BCF8200EC2240 /* Category.swift */; };
+		59407ADA299FAD2400EC2240 /* SwipeCellKit in Frameworks */ = {isa = PBXBuildFile; productRef = 59407AD9299FAD2400EC2240 /* SwipeCellKit */; };
 		EB2BE4FA239524DB00FB933B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4F9239524DB00FB933B /* AppDelegate.swift */; };
 		EB2BE4FE239524DB00FB933B /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE4FD239524DB00FB933B /* TodoListViewController.swift */; };
 		EB2BE501239524DB00FB933B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE4FF239524DB00FB933B /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59407AD1299BC1DD00EC2240 /* RealmSwift in Frameworks */,
+				59407ADA299FAD2400EC2240 /* SwipeCellKit in Frameworks */,
 				59407ACF299BC1DD00EC2240 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,6 +130,7 @@
 			packageProductDependencies = (
 				59407ACE299BC1DD00EC2240 /* Realm */,
 				59407AD0299BC1DD00EC2240 /* RealmSwift */,
+				59407AD9299FAD2400EC2240 /* SwipeCellKit */,
 			);
 			productName = Todoey;
 			productReference = EB2BE4F6239524DB00FB933B /* Todoey.app */;
@@ -159,6 +162,7 @@
 			mainGroup = EB2BE4ED239524DB00FB933B;
 			packageReferences = (
 				59407ACD299BC1DD00EC2240 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				59407AD8299FAD2400EC2240 /* XCRemoteSwiftPackageReference "SwipeCellKit" */,
 			);
 			productRefGroup = EB2BE4F7239524DB00FB933B /* Products */;
 			projectDirPath = "";
@@ -401,6 +405,14 @@
 				kind = branch;
 			};
 		};
+		59407AD8299FAD2400EC2240 /* XCRemoteSwiftPackageReference "SwipeCellKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwipeCellKit/SwipeCellKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -413,6 +425,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 59407ACD299BC1DD00EC2240 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		59407AD9299FAD2400EC2240 /* SwipeCellKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59407AD8299FAD2400EC2240 /* XCRemoteSwiftPackageReference "SwipeCellKit" */;
+			productName = SwipeCellKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
